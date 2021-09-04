@@ -39,6 +39,9 @@ class UserService(val userRepository: UserRepository,
     }
 
     fun updateToken(user: User): Mono<User> {
+
+        val saveUser: Mono<User> = userRepository.save(user);
+
         user.token = makeNewToken(user)
 
         return userRepository.save(user)
